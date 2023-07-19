@@ -12,7 +12,7 @@ function writeFile(resultArr) {
 
 
     wb.xlsx
-        .writeFile("./excel-export/excel/subtitles.xlsx")
+        .writeFile("./excel/subtitles.xlsx")
         .then(() => {
             console.log('file created');
         })

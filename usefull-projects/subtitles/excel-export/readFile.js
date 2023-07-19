@@ -12,7 +12,7 @@ const writeFile = importWriteFile.writeFile;
 
 
 const wb = new ExcelJS.Workbook();
-const fileName = "./excel-export/excel/iknow.xlsx";
+const fileName = "./excel/iknow.xlsx";
 
 let readArr;
 

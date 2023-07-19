@@ -109,6 +109,7 @@ const makeUniq = (arr) => {
     return [...uniqSet];
 }
 
+
 const newArr = makeUniq(splitString);
 
 module.exports.newArr = newArr;
