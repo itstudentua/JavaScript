@@ -7,6 +7,7 @@ const uniqueArray = importUniqueArr.newArr;
 const importNewUniqueWords = require("./js/newUniqueWords");
 const getWords = importNewUniqueWords.getWords;
 const importWriteFile = require("./js/writeFile");
+const { log } = require('console');
 const writeFile = importWriteFile.writeFile;
 
 
@@ -40,6 +41,7 @@ function fillArray(content) {
 
 
 // here should be async/await but i don't know how to do it yet 
+
 
 setTimeout(() => {
     const finalResultArr = getWords(readArr, uniqueArray);
