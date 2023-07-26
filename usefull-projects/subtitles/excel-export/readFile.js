@@ -7,7 +7,6 @@ const uniqueArray = importUniqueArr.newArr;
 const importNewUniqueWords = require("./js/newUniqueWords");
 const getWords = importNewUniqueWords.getWords;
 const importWriteFile = require("./js/writeFile");
-const { log } = require('console');
 const writeFile = importWriteFile.writeFile;
 
 
@@ -45,5 +44,7 @@ function fillArray(content) {
 
 setTimeout(() => {
     const finalResultArr = getWords(readArr, uniqueArray);
+    const newWordsCount = finalResultArr.length;
+    console.log(`New words for me: ${newWordsCount}`);
     writeFile(finalResultArr);
 }, 1000);
