@@ -1,8 +1,6 @@
 function generateExcel() {
     // Создаем данные для таблицы (пример)
-    const data = [
-        ["Words"]
-    ];
+    const data = [];
 
     for (let item of resultArray) {
         data.push([item]);

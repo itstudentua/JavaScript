@@ -44,16 +44,13 @@
         }
 
         .main-section {
-            position: absolute;
-            top: 0;
-            left: 0;
+           
             display: flex;
             justify-content: center;
             align-items: center;
             color: #878686;
             overflow-x: hidden;
-            width: 100%;
-            height: 100vh;
+
             gap: 50px;
             flex-wrap: wrap;
         }
@@ -202,7 +199,7 @@
             <nav>
                 <a href="index.html">Words Learning</a>
             </nav>
-
+           <!-- <textarea name="" id="texta" cols="30" rows="10"></textarea>-->
             <section class="main-section">
                 <div class="first-div">
                     <div class="file-input">
@@ -254,7 +251,29 @@ At the Arab League summit in May, Syria  was readmitted to the organisation afte
                 </div>
             </section>
         </main>
+        <script>
+            //const texta = document.getElementById("texta");
 
+            let googleSheetArray = [];
+
+            function loadDataFromGoogleSheet() {
+                fetch(
+                "https://script.google.com/macros/s/AKfycbyEm_5bfp2RipVS6WZV12g4pXosuHOwC_nfOqOWW1q2QnZH5RDdhh8KfqT0gHE6JDsgZA/exec"
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    //texta.textContent = googleSheetArray;
+                    googleSheetArray = data.map(el => el[0]);
+                    console.log('googleSheetArray', googleSheetArray);
+                    //texta.textContent = googleSheetArray;        
+                })
+                .catch((error) => {
+                    console.error("Ошибка:", error);
+                });
+            }
+
+            loadDataFromGoogleSheet();
+        </script>
         <script>
             const downExcel = document.getElementById("downExcel");
             downExcel.disabled = true;
@@ -262,5 +281,6 @@ At the Arab League summit in May, Syria  was readmitted to the organisation afte
         <script src="js/readFile.js"></script>
         <script src="js/processFile.js"></script>
         <script src="js/writeFile.js"></script>
+        <script src="js/sendToGoogleSheet.js"></script>
     </body>
 </html>
