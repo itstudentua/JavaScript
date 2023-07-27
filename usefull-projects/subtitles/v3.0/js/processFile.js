@@ -48,22 +48,18 @@ function processWords() {
             }, "1500");
         } else {
             console.log('Dont send to server');
-            myDictionary = googleSheetArray.map(el => el);
         }
-
+        myDictionary = googleSheetArray.map(el => el);
     }
 
-    setTimeout(() => {
-        resultArray = getWords(myDictionary, newArr)
+    resultArray = getWords(myDictionary, newArr)
 
-        const wordCount = splitString.length;
-        const uniqWordsCount = newArr.length;
-        const newWordsCount = resultArray.length;
+    const wordCount = splitString.length;
+    const uniqWordsCount = newArr.length;
+    const newWordsCount = resultArray.length;
 
-        total_w.textContent = `Total words: ${wordCount}`;
-        uniq_w.textContent = `Unique words: ${uniqWordsCount}`;
-        new_w.textContent = `New words: ${newWordsCount}`;
-        downExcel.disabled = false;
-    }, "1500");
-
+    total_w.textContent = `Total words: ${wordCount}`;
+    uniq_w.textContent = `Unique words: ${uniqWordsCount}`;
+    new_w.textContent = `New words: ${newWordsCount}`;
+    downExcel.disabled = false;
 }
