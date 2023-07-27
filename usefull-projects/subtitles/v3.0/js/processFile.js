@@ -53,20 +53,17 @@ function processWords() {
 
     }
 
-
-
-    resultArray = getWords(myDictionary, newArr)
-
-
-    const wordCount = splitString.length;
-    const uniqWordsCount = newArr.length;
-    const newWordsCount = resultArray.length;
-
     setTimeout(() => {
+        resultArray = getWords(myDictionary, newArr)
+
+        const wordCount = splitString.length;
+        const uniqWordsCount = newArr.length;
+        const newWordsCount = resultArray.length;
+
         total_w.textContent = `Total words: ${wordCount}`;
         uniq_w.textContent = `Unique words: ${uniqWordsCount}`;
         new_w.textContent = `New words: ${newWordsCount}`;
-        downExcel.disabled = false;    
+        downExcel.disabled = false;
     }, "1500");
 
 }
