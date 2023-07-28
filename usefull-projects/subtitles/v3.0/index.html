@@ -265,7 +265,10 @@ At the Arab League summit in May, Syria  was readmitted to the organisation afte
                     .then((response) => response.json())
                     .then((data) => {
                         //texta.textContent = googleSheetArray;
-                        googleSheetArray = data.map((el) => el[0]);
+                        googleSheetArray = data.map((el) => {
+                            return typeof el[0] === 'boolean'? el[0].toString(): el[0];
+                            // true and false are always boolean type at google sheets
+                        });
                         console.log("googleSheetArray", googleSheetArray);
                         //texta.textContent = googleSheetArray;
                     })

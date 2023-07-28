@@ -16,13 +16,10 @@ function getWords(arr1, arr2) {
 
 function processWords() {
     readExcel();
-    const textAreaInputContent = textAreaInput.value;
+    const textAreaInputContent = textAreaInput.value.toLowerCase();
 
-    const splitString = textAreaInputContent.split("\n").join(" ").split(",").join(" ").split(".").join(" ").split("!").join(" ").split(`"`).join(" ").split(")").join(" ").split("(").join(" ").split("?").join(" ").split("/").join(" ").split(":").join(" ").split(";").join(" ").toLowerCase().split(' '); // remove . , ! ? :
-
-    while (splitString.indexOf("\r") !== -1 || splitString.indexOf('') !== -1) {
-        splitString.splice(splitString.indexOf(""), 1); // deleting of an empty elements
-    }
+    // split string to words
+    const splitString = textAreaInputContent.match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || [];
 
     const makeUniq = (arr) => {
         const uniqSet = new Set(arr); // unique list
@@ -31,27 +28,22 @@ function processWords() {
 
     const newArr = makeUniq(splitString);
 
-    let myDictionary = [];
+    let myDictionary = makeUniq(googleSheetArray.concat(readFile));
 
-    console.log('readFile', readFile);
+    console.log(myDictionary);
 
-    if (readFile.length == 0 || !readFile) {
-        myDictionary = googleSheetArray.map(el => el);
+    if (myDictionary.length === googleSheetArray.length && myDictionary.every(element => googleSheetArray.includes(element))) {
+        console.log('Dont send to server');
+
     } else {
-        myDictionary = getWords(googleSheetArray, readFile);
-        if (myDictionary.length != 0) {
-            console.log('send to server');
-            sendDataToGS(myDictionary);
-            setTimeout(() => {
-                console.log("Delayed for 1.5 second.");
-                loadDataFromGoogleSheet();
-            }, "1500");
-        } else {
-            console.log('Dont send to server');
-        }
-        myDictionary = googleSheetArray.map(el => el);
+        console.log('send to server');
+        sendDataToGS(myDictionary);
+        setTimeout(() => {
+            console.log("Delayed for 1.5 second.");
+            loadDataFromGoogleSheet();
+        }, "1500");        
     }
-
+    
     resultArray = getWords(myDictionary, newArr)
 
     const wordCount = splitString.length;

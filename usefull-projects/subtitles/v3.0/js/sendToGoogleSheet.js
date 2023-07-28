@@ -2,7 +2,7 @@ function sendDataToGS(valueNew) {
     const data = valueNew;
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbx31wOQW_afJ_5JF7uRpLMBLWr9Nq1t0TrEleg3s8Mvxo7ggEZaBWUa89YT0smMqKfrlQ/exec",
+      "https://script.google.com/macros/s/AKfycbz2-9P7xPBtOKdiSDN-vI3t9TyZ11hDZQud-aKbzrL-V-gc7xtHRdfJcTbcHmjEw7xTHg/exec",
       {
         method: "POST",
         headers: {
