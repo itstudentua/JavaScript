@@ -1,51 +1,32 @@
-const wordsExceptions = `interested
-excited 
-tired 
-bored 
-amazed 
-confused
-delighted
-satisfied
-surprised
-disappointed
-frightened
-relaxed
-wicked
-speed
-need
-seed
-deed
-breed
-weed
-feed
-bleed`;
-
-let str = "Hello, world!";
-let elementToCheck = "o";
-
-let isElementInString = str.includes(elementToCheck);
-
 function wordsMorphology(wordsString) {
     return wordsString.map((el) => {
-        // removing 'not' from words
-        let substring_not = (el === "can't" || el === "won't") ? "'t" : "n't"; // exception for can't and won't
-        let substring_s = el.split(substring_not).join("");
-        // removing 's' from words
-        let substring_ed = substring_s.split("'s").join("");
-        let finalString = el;;
-        // removing 'ed' from words
-        if (!wordsExceptions.includes(el)) {
-            finalString = substring_ed.split('ed').join("");
+        // removing "'s" from words
+        if (el.endsWith("'s") || el.endsWith("'m") || el.endsWith("'d")) {
+            return el.slice(0, -2);
         }
-
-        return finalString;
+        if (el.endsWith("'ve") || el.endsWith("'re") || el.endsWith("'ll")) {
+            return el.slice(0, -3);
+        }
+        // removing 'not' from words
+        else if (
+            el.endsWith("'t") &&
+            (el === "can't" || el === "won't")
+        ) {
+            // exception for can't and won't
+            return el.split("'t").join("");
+        } else if (el.endsWith("n't")) {
+            return el.split("n't").join("");
+        }
+        else {
+            return pluralize.singular(el);
+        }
     });
-
 }
 
 function splitStringFunc(textToSplit) {
     // split string to words
     return wordsMorphology(textToSplit.toLowerCase().match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || []);
+    //return textToSplit.toLowerCase().match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || [];
 }
 
 const makeUniq = (arr) => {
