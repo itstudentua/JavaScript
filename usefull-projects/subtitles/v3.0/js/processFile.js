@@ -6,7 +6,7 @@ const uniq_w = document.getElementById('uniq_w');
 const new_w = document.getElementById('new_w');
 
 
-function getWords(arr1, arr2) {
+function getNewWords(arr1, arr2) {
     Array.prototype.diff = function (a) {
         return this.filter(function (i) { return a.indexOf(i) < 0; });
     };
@@ -14,18 +14,23 @@ function getWords(arr1, arr2) {
     return arr2.diff(arr1);
 }
 
+function splitStringFunc(textToSplit) {
+    // split string to words
+    return textToSplit.toLowerCase().match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || [];
+}
+
+const makeUniq = (arr) => {
+    const uniqSet = new Set(arr); // unique list
+    return [...uniqSet];
+}
+
 function processWords() {
     readExcel();
-    const textAreaInputContent = textAreaInput.value.toLowerCase();
+    const textAreaInputContent = textAreaInput.value;
 
     // split string to words
-    const splitString = textAreaInputContent.match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || [];
-
-    const makeUniq = (arr) => {
-        const uniqSet = new Set(arr); // unique list
-        return [...uniqSet];
-    }
-
+    const splitString = splitStringFunc(textAreaInputContent);
+  
     const newArr = makeUniq(splitString);
 
     let myDictionary = makeUniq(googleSheetArray.concat(readFile));
@@ -41,10 +46,10 @@ function processWords() {
         setTimeout(() => {
             console.log("Delayed for 1.5 second.");
             loadDataFromGoogleSheet();
-        }, "1500");        
+        }, "1500");
     }
-    
-    resultArray = getWords(myDictionary, newArr)
+
+    resultArray = getNewWords(myDictionary, newArr)
 
     const wordCount = splitString.length;
     const uniqWordsCount = newArr.length;

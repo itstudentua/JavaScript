@@ -20,9 +20,11 @@ function readExcel() {
                 header: 1,
             });
 
-            readFile = excelData.map((el) => el[0]);
+            const res = excelData.map((el) => el[0]);
+            readFile = splitStringFunc(res.join());
+            console.log(readFile);
             //textArea.textContent = readFile;
-            fileName.textContent = fileInput.value;
+            fileName.textContent = (fileInput.value).split('\\').at(-1);
         };
 
         // Чтение файла в формате binary
