@@ -14,15 +14,7 @@ function getNewWords(arr1, arr2) {
     return arr2.diff(arr1);
 }
 
-function splitStringFunc(textToSplit) {
-    // split string to words
-    return textToSplit.toLowerCase().match(/[^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+(?:[-'][^\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+)*/g) || [];
-}
 
-const makeUniq = (arr) => {
-    const uniqSet = new Set(arr); // unique list
-    return [...uniqSet];
-}
 
 function processWords() {
     readExcel();
@@ -30,12 +22,18 @@ function processWords() {
 
     // split string to words
     const splitString = splitStringFunc(textAreaInputContent);
-  
+
     const newArr = makeUniq(splitString);
 
-    let myDictionary = makeUniq(googleSheetArray.concat(readFile));
+    let myDictionary;
+ 
+    if (googleSheetArray.length == 0) {
+        myDictionary = makeUniq(readFile);
+    } else {
+        myDictionary = makeUniq(googleSheetArray.concat(readFile));
+    }
 
-    console.log(myDictionary);
+ 
 
     if (myDictionary.length === googleSheetArray.length && myDictionary.every(element => googleSheetArray.includes(element))) {
         console.log('Dont send to server');
@@ -50,6 +48,9 @@ function processWords() {
     }
 
     resultArray = getNewWords(myDictionary, newArr)
+
+    console.log(resultArray);
+
 
     const wordCount = splitString.length;
     const uniqWordsCount = newArr.length;
