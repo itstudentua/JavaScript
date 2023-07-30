@@ -5,6 +5,8 @@ const total_w = document.getElementById('total_w');
 const uniq_w = document.getElementById('uniq_w');
 const new_w = document.getElementById('new_w');
 
+//const downExcel = document.getElementById('downExcel');
+
 
 function getNewWords(arr1, arr2) {
     Array.prototype.diff = function (a) {
@@ -60,4 +62,5 @@ function processWords() {
     uniq_w.textContent = `Unique words: ${uniqWordsCount}`;
     new_w.textContent = `New words: ${newWordsCount}`;
     downExcel.disabled = false;
+    downExcel.style.visibility = 'visible';
 }
