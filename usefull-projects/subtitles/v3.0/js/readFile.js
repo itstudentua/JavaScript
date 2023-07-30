@@ -1,6 +1,4 @@
 //const textArea = document.getElementById("textAr");
-const fileInput = document.getElementById("file-input");
-const fileName = document.getElementById('file_name');
 
 let readFile = [];
 

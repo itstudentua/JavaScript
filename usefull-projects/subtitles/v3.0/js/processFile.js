@@ -1,11 +1,4 @@
-const textAreaInput = document.getElementById("textArInput");
 let resultArray = [];
-
-const total_w = document.getElementById('total_w');
-const uniq_w = document.getElementById('uniq_w');
-const new_w = document.getElementById('new_w');
-
-//const downExcel = document.getElementById('downExcel');
 
 
 function getNewWords(arr1, arr2) {
@@ -53,7 +46,6 @@ function processWords() {
 
     console.log(resultArray);
 
-
     const wordCount = splitString.length;
     const uniqWordsCount = newArr.length;
     const newWordsCount = resultArray.length;
@@ -61,6 +53,6 @@ function processWords() {
     total_w.textContent = `Total words: ${wordCount}`;
     uniq_w.textContent = `Unique words: ${uniqWordsCount}`;
     new_w.textContent = `New words: ${newWordsCount}`;
-    downExcel.disabled = false;
     downExcel.style.visibility = 'visible';
+    showTable.style.visibility = 'visible';
 }
