@@ -1,12 +1,20 @@
-function generateExcel() {
+function generateExcel(arr) {
     // Создаем данные для таблицы (пример)
-    const data = [];
-
-    for (let item of resultArray) {
-        data.push([item]);
+    let data;
+    
+    if (arr === "result") {
+        data = resultArray.map(el => [el]);
+    }
+    else {
+        data = googleSheetArray.map(el => [el]);
     }
 
-    
+    if (currentSection == undefined || currentSection == "second") {
+        data = resultArray.map(el => [el]);
+    }
+
+    console.log(currentSection == undefined);
+
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(data);
 

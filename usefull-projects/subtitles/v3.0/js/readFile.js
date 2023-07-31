@@ -1,15 +1,15 @@
 //const textArea = document.getElementById("textAr");
 
-let readFile = [];
+let readFile = "";
 
 fileInput.addEventListener('change', readExcel);
 
 function readExcel() {
     const file = fileInput.files[0];
     if (file) {
-        const allowedExtensions = /(\.xlsx|\.txt|\.doc|\.docx)$/i;
+        const allowedExtensions = /(\.xlsx|\.txt)$/i;
         if (!allowedExtensions.exec(file.name)) {
-            alert('Invalid file format\nAllowed only .xlsx, .txt, .doc .docx');
+            alert('Invalid file format\nAllowed only .xlsx, .txt');
             fileInput.value = ''; // Очищаем поле input для файла
             return;
         }
@@ -26,10 +26,11 @@ function readExcel() {
             const excelData = XLSX.utils.sheet_to_json(worksheet, {
                 header: 1,
             });
-
-            const res = excelData.map((el) => el[0]);
+            const res = excelData.map((el) => el);
             readFile = splitStringFunc(res.join());
-            //textArea.textContent = readFile;
+            textAreaInput1.value = readFile;
+            console.log(readFile);
+
         };
 
         // Чтение файла в формате binary
